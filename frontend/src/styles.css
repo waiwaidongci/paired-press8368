@@ -8,3 +8,22 @@ header button.text {color:var(--paper)}
 .hero aside { border-left:8px double var(--accent); }
 .eyebrow { text-transform:uppercase;border-left:0;border-top:3px solid var(--accent);padding:10px 0 0;max-width:420px; }
 .result-intro { border-left:8px double var(--accent); }
+
+/* Grid registration: paired sheet editors and patch heatmap. */
+.grid-form { max-width:1100px; }
+.grid-editors { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.grid-editor textarea { font-family:'IBM Plex Mono',monospace; font-size:12px; min-height:220px; white-space:pre; }
+.hint { font-size:12px; color:var(--ink); opacity:.75; }
+.cap-badge { font-family:'IBM Plex Mono',monospace; font-size:12px; padding:8px 14px; border:1px solid var(--accent); white-space:nowrap; align-self:center; }
+.heatmap { display:grid; gap:2px; max-width:1000px; margin:18px 0 10px; background:var(--rule); padding:2px; }
+.heatmap .cell { aspect-ratio:1; min-width:10px; background:color-mix(in oklch,var(--paper) 88%,var(--ink)); position:relative; }
+.heatmap .cell.pos { background:oklch(58% 0.17 28); outline:2px solid oklch(40% 0.2 25); outline-offset:-2px; }
+.heatmap .cell.neg { background:oklch(48% 0.13 255); outline:2px solid oklch(32% 0.15 255); outline-offset:-2px; }
+.heatmap .cell.invalid { background:repeating-linear-gradient(45deg,var(--rule),var(--rule) 4px,var(--paper) 4px,var(--paper) 8px); }
+.legend { display:flex; flex-wrap:wrap; gap:22px; font-size:12px; max-width:1000px; }
+.legend span { display:inline-flex; align-items:center; gap:8px; }
+.sw { width:16px; height:16px; display:inline-block; border:1px solid var(--ink); }
+.sw.pos { background:oklch(58% 0.17 28); }
+.sw.neg { background:oklch(48% 0.13 255); }
+.sw.invalid { background:repeating-linear-gradient(45deg,var(--rule),var(--rule) 3px,var(--paper) 3px,var(--paper) 6px); }
+@media(max-width:767px){ .grid-editors { grid-template-columns:1fr; } }

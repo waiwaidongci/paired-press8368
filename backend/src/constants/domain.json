@@ -1,44 +1,45 @@
 {
   "study": "PressStudy",
-  "row": "MatchedPair",
-  "run": "PairedRun",
+  "row": "PressSheet",
+  "run": "GridRun",
   "review": "Review",
-  "study_label": "试印研究",
-  "row_label": "成对纸样",
-  "field_label": "配对差 after − before",
-  "fields": [
-    [
-      "before",
-      "原工艺色差 ΔE",
-      "number"
-    ],
-    [
-      "after",
-      "新工艺色差 ΔE",
-      "number"
-    ]
+  "study_label": "套印研究",
+  "row_label": "纸样格图",
+  "field_label": "两道工艺格图配对差（工艺B − 工艺A）",
+  "processes": [
+    ["a", "工艺A 色差格图 ΔE"],
+    ["b", "工艺B 色差格图 ΔE"]
   ],
+  "process_labels": {
+    "a": "工艺A",
+    "b": "工艺B"
+  },
   "defaults": {
-    "resamples": 10000
+    "threshold": 1.5
+  },
+  "limits": {
+    "max_sheets": 14,
+    "max_grid": 96,
+    "enum_seconds": 60
   },
   "names": [
     "栖木·米白纸套印",
     "栖木·棉纸校样",
     "栖木·轻涂纸试印"
   ],
-  "note": "同一纸张上成对测量；小样本枚举全部符号，较大样本使用固定种子 Monte Carlo 与加一校正。",
+  "note": "两道工艺的色差格图按纸样与定位角对齐；整纸平均色差会盖住成片套印偏差。每格至少两张纸成对实测，缺测不补值；越过门槛的同向平均配对差按四邻接连成斑块，逐张整图翻转差值，以每次最大斑块面积给出校正 p 值。",
   "accent": "58 0.15 33",
   "dark": "27 0.017 50",
   "bg": "94 0.027 70",
   "id": "gb-0038",
-  "direction": "实验分析",
-  "title": "栖木印刷配对试验簿",
+  "direction": "套印偏差分析",
+  "title": "栖木印刷套印格图分析簿",
   "slug": "paired-press",
-  "algorithm": "配对差均值与精确符号翻转置换检验",
-  "entities": "PressStudy / MatchedPair / PairedRun / Review",
-  "scenario": "同纸张两工艺成对色差→配对分析→试印复核；枚举n<=18，以上固定seed Monte Carlo加一校正",
+  "algorithm": "越门槛同向平均配对差的四邻接斑块 + 逐张整图符号翻转校正检验",
+  "entities": "PressStudy / PressSheet / GridRun / Review",
+  "scenario": "两道工艺色差格图分版补传→按纸样定位角对齐→同向越门槛斑块→整图符号翻转最大斑块面积校正p；容量限14张、每图96×96，全枚举限60秒",
   "visual": "印刷套色、炭灰与赭红",
-  "oracle": "小n穷举手算；交换两列统计量变号p相同；缺失配对拒绝",
+  "oracle": "小样本穷举手算；每格成对、缺测不补值；逐张整图翻转；交换两工艺符号反转、最大斑块面积与p不变",
   "frontend": 18242,
   "backend": 19242,
   "db_port": 17742,
